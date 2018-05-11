@@ -2,10 +2,7 @@ package online.mmohanram13.dacs;
 
 import android.content.Context;
 import android.content.Intent;
-<<<<<<< HEAD
 import android.database.sqlite.SQLiteDatabase;
-=======
->>>>>>> 9194d84e39f844186a5713b6a185bb9af3977d8d
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
@@ -43,15 +40,9 @@ public class MainActivity extends ConnectionsActivity {
     private static final String SERVICE_ID =
             "online.mmohanram13.dacs.SERVICE_ID";
     private String mName;
-<<<<<<< HEAD
     protected String recipientText,endpointRecipientId;
-    //protected Map<String,String> textMap = new HashMap<>();
 
     private ConversationDatabaseHelper db;
-
-=======
-    private static final String TAG = "ConnectionsActivity" ;
->>>>>>> 9194d84e39f844186a5713b6a185bb9af3977d8d
     /**
      * Listens to holding/releasing the volume rocker.
      */
@@ -241,7 +232,6 @@ public class MainActivity extends ConnectionsActivity {
 
     @Override
     protected void onReceive(Endpoint endpoint, Payload payload) {
-<<<<<<< HEAD
         if (payload.getType() == Payload.Type.BYTES) {
             try {
                 recipientText = new String(payload.asBytes(), "UTF-8");
@@ -256,13 +246,6 @@ public class MainActivity extends ConnectionsActivity {
                 }*/
                 long id = db.insertConverseData(endpoint.getName(), localEndpointName,recipientText);
                 logD("Sender: " + endpoint.getName() + " Recipient: " + localEndpointName + " Data: " + recipientText);
-=======
-        super.onReceive(endpoint, payload);
-        if (payload.getType() == Payload.Type.BYTES) {
-            try {
-                String receiveText = new String(payload.asBytes(), "UTF-8");
-                logD("Log from Main Activity: " + receiveText);
->>>>>>> 9194d84e39f844186a5713b6a185bb9af3977d8d
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }

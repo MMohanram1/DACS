@@ -34,18 +34,13 @@ public class ConversationActivity extends ConnectionsActivity {
     private ConversationRecyclerView mAdapter;
     private EditText text;
     private Button send;
-<<<<<<< HEAD
     String value, endpointId, localName;
     String localTime, presentDate1;
     String presentDate = new String("Null");
-=======
-    String value, endpointId;
->>>>>>> 9194d84e39f844186a5713b6a185bb9af3977d8d
     private static final Strategy STRATEGY = Strategy.P2P_CLUSTER;
     private static final String SERVICE_ID =
             "online.mmohanram13.dacs.SERVICE_ID";
     private String mName;
-<<<<<<< HEAD
     private ConversationDatabaseHelper db;
     private List<ConversationDB> chatDataList = new ArrayList<>();
 
@@ -67,14 +62,6 @@ public class ConversationActivity extends ConnectionsActivity {
     @Override
     protected Strategy getStrategy() {
         return STRATEGY;
-=======
-    String localTime, presentDate1;
-    String presentDate = new String("Null");
-
-    @Override
-    protected void onStart() {
-        super.onStart();
->>>>>>> 9194d84e39f844186a5713b6a185bb9af3977d8d
     }
 
     @Override
@@ -198,7 +185,6 @@ public class ConversationActivity extends ConnectionsActivity {
         return data;
     }
 
-<<<<<<< HEAD
     private void createData(String sender, String recipient, String data){
         long id = db.insertConverseData(sender, recipient, data);
         logD("Sender: " + sender + " Recipient: " + recipient + " Data: " + data);
@@ -210,21 +196,6 @@ public class ConversationActivity extends ConnectionsActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-=======
-    /*
-    protected void onReceiveData(Endpoint endpoint, Payload payload){
-        logD("onReceive() of ConversationActivity");
-        if(payload.getType() == Payload.Type.BYTES) {
-            logD("Text from Conversation");
-            try {
-                String recipientText = new String(payload.asBytes(), "UTF-8");
-                logD(recipientText + " " + endpointId);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            logD(recipientText + " " + endpoint.getId() + " " + endpointId);
-            if (endpointId.equals(endpoint.getId())) {
->>>>>>> 9194d84e39f844186a5713b6a185bb9af3977d8d
                 try {
                     if (!conversationDB.getData().equals("")) {
                         logD(conversationDB.getData() + " " + conversationDB.getSender());
@@ -251,22 +222,11 @@ public class ConversationActivity extends ConnectionsActivity {
                         mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1);
                         chatDataList.remove(conversationDB);
                     }
-                }catch(NullPointerException e){
+                } catch (NullPointerException e) {
                     e.getCause();
                 }
             }
-<<<<<<< HEAD
         });
-=======
-        }
-        */
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_userphoto, menu);
-        return true;
->>>>>>> 9194d84e39f844186a5713b6a185bb9af3977d8d
     }
 
     @Override
