@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DACS</string>
+    <string name="error_missing_permissions">Cannot start without required permissions</string>
+    <string name="toast_connected">Connected to %s</string>
+    <string name="toast_disconnected">Disconnected from %s</string>
+    <string name="title_activity_coversation">Coversation Activity</string>
+</resources>
