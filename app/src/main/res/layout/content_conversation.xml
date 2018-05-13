@@ -34,7 +34,7 @@
             android:layout_toLeftOf="@id/bt_send"
             android:background="@drawable/bg_white_rounded"
             android:layout_centerVertical="true">
-            <ImageButton
+            <!--<ImageButton
                 android:id="@+id/bt_attachment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,12 +42,11 @@
                 android:padding="10dp"
                 android:layout_alignParentRight="true"
                 android:background="@android:color/transparent"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"/>-->
             <EditText
                 android:id="@+id/et_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/bt_attachment"
                 android:padding="15dp"
                 android:hint="Enter your message"
                 android:maxLines="3"
@@ -57,6 +56,7 @@
                 android:textAppearance="@style/Light"
                 android:background="@android:color/transparent"
                 android:inputType="textCapSentences"/>
+            <!--android:layout_toLeftOf="@id/bt_attachment"-->
         </RelativeLayout>
     </RelativeLayout>
 

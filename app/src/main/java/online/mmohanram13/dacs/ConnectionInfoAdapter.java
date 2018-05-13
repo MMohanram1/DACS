@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ConnectionInfoAdapter extends RecyclerView.Adapter<ConnectionInfoAdapter.ConnectionViewHolder> {
 
-    private List<ConnectionsActivity.Endpoint> connectionInfo;
+    private List<ConnectionsFragment.Endpoint> connectionInfo;
 
     public class ConnectionViewHolder extends RecyclerView.ViewHolder{
         public TextView connInfo;
@@ -25,7 +25,7 @@ public class ConnectionInfoAdapter extends RecyclerView.Adapter<ConnectionInfoAd
         }
     }
 
-    public ConnectionInfoAdapter(List<ConnectionsActivity.Endpoint> connectionInfo){
+    public ConnectionInfoAdapter(List<ConnectionsFragment.Endpoint> connectionInfo){
         this.connectionInfo = connectionInfo;
     }
 
@@ -39,7 +39,7 @@ public class ConnectionInfoAdapter extends RecyclerView.Adapter<ConnectionInfoAd
 
     @Override
     public void onBindViewHolder(ConnectionViewHolder holder, int position) {
-        ConnectionsActivity.Endpoint connectionInformation = connectionInfo.get(position);
+        ConnectionsFragment.Endpoint connectionInformation = connectionInfo.get(position);
         holder.connInfo.setText(connectionInformation.getName());
     }
 

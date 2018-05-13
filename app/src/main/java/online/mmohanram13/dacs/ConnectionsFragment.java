@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.Set;
 
 /** A class that connects to Nearby Connections and provides convenience methods and callbacks. */
-public abstract class ConnectionsActivity extends AppCompatActivity {
+public abstract class ConnectionsFragment extends Fragment {
 
   /**
    * These permissions are required before connecting to Nearby Connections. Only {@link
@@ -57,7 +57,7 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
   public String localEndpointName;
 
   private static final int REQUEST_CODE_REQUIRED_PERMISSIONS = 1;
-  private static final String TAG = "ConnectionsActivity" ;
+  private static final String TAG = "ConnectionsFragment" ;
 
   /** Our handler to Nearby Connections. */
   private ConnectionsClient mConnectionsClient;
@@ -100,7 +100,7 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
                   endpointId, connectionInfo.getEndpointName()));
           Endpoint endpoint = new Endpoint(endpointId, connectionInfo.getEndpointName());
           mPendingConnections.put(endpointId, endpoint);
-          ConnectionsActivity.this.onConnectionInitiated(endpoint, connectionInfo);
+          ConnectionsFragment.this.onConnectionInitiated(endpoint, connectionInfo);
         }
 
         @Override
@@ -114,7 +114,7 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
             logW(
                 String.format(
                     "Connection failed. Received status %s.",
-                    ConnectionsActivity.toString(result.getStatus())));
+                    ConnectionsFragment.toString(result.getStatus())));
             onConnectionFailed(mPendingConnections.remove(endpointId));
             return;
           }
@@ -150,16 +150,16 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
 
   /** Called when our Activity is first created. */
   @Override
-  protected void onCreate(@Nullable Bundle savedInstanceState) {
+  public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mConnectionsClient = Nearby.getConnectionsClient(this);
+    mConnectionsClient = Nearby.getConnectionsClient(getActivity());
   }
 
   /** Called when our Activity has been made visible to the user. */
   @Override
-  protected void onStart() {
+  public void onStart() {
     super.onStart();
-    if (!hasPermissions(this, getRequiredPermissions())) {
+    if (!hasPermissions(getActivity(), getRequiredPermissions())) {
       requestPermissions(getRequiredPermissions(), REQUEST_CODE_REQUIRED_PERMISSIONS);
     }
   }
@@ -172,12 +172,12 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
     if (requestCode == REQUEST_CODE_REQUIRED_PERMISSIONS) {
       for (int grantResult : grantResults) {
         if (grantResult == PackageManager.PERMISSION_DENIED) {
-          Toast.makeText(this, R.string.error_missing_permissions, Toast.LENGTH_LONG).show();
-          finish();
+          Toast.makeText(getContext(), R.string.error_missing_permissions, Toast.LENGTH_LONG).show();
+          getActivity().finish();
           return;
         }
       }
-      recreate();
+      getActivity().recreate();
     }
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
@@ -490,7 +490,7 @@ public abstract class ConnectionsActivity extends AppCompatActivity {
   protected void onReceive(Endpoint endpoint, Payload payload){}
 
   /**
-   * An optional hook to pool any permissions the app needs with the permissions ConnectionsActivity
+   * An optional hook to pool any permissions the app needs with the permissions ConnectionsFragment
    * will request.
    *
    * @return All permissions required for the app to properly function.
